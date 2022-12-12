@@ -1,3 +1,4 @@
+import base64
 import os
 
 from sklearn.neighbors import NearestNeighbors
@@ -23,7 +24,7 @@ def db_create(folder_dir):
     vectors, links = [], []
     for image in os.listdir(folder_dir):
         if image.endswith(".jpg"):
-            vectors.append(vectorize(cv.imread('images/' + image)))
+            vectors.append(base64.b64encode((vectorize(cv.imread('images/' + image)))))
             links.append(image)
     return pd.DataFrame({"vector": vectors, "link": links})
 

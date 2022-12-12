@@ -5,7 +5,9 @@ from PIL import UnidentifiedImageError
 from main import *
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
-db = db_create('D:/Users/olegs/PycharmProjects/cv_l10/images')
+db = pd.read_csv('out.csv', delimiter=',')
+db['vector'] = db['vector'].apply(
+    lambda x: np.frombuffer(base64.b64decode(bytes(x[2:-1], encoding='ascii')), dtype=np.float64))
 
 
 def main():
